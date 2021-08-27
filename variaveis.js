@@ -12,8 +12,8 @@ let localNascimento = "Rio de Janeiro/ RJ";
 // console.log(localNascimento);
 let cidadeAtual = "Novo Hamburgo/RS";
 // console.log(cidadeAtual);
-trabalhando = false;
+let trabalhando = false;
 
-apresentacao = `Meu nome é ${nomeCompleto}, sou conhecida como ${apelido} e tenho ${idade} anos. Nasci no dia ${dataNascimento}, na cidade de ${localNascimento} e atualmente resido em ${cidadeAtual}. Tenho ${altura}m de altura e atualmente estou ${trabalhando ? "empregada" : "desempregada"}.`;
+const apresentacao = `Meu nome é ${nomeCompleto}, sou conhecida como ${apelido} e tenho ${idade} anos. Nasci no dia ${dataNascimento}, na cidade de ${localNascimento} e atualmente resido em ${cidadeAtual}. Tenho ${altura}m de altura e atualmente estou ${trabalhando ? "empregada" : "desempregada"}.`;
 
 console.log(apresentacao);
