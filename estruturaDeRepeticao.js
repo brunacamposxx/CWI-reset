@@ -1,40 +1,40 @@
-// let num = 0;
-// while(num <= 10){
-// 	console.log(num++);
-// };
+ let num = 0;
+ while(num <= 10){
+ 	console.log(num++);
+};
 
-// // ou
+// ou
 
-// do{
-// 	console.log("o do imprime primeiro e depois verifica a condição")
-// }while(num <= 10);
+do{
+	console.log("o do imprime primeiro e depois verifica a condição")
+}while(num <= 10);
 
-// // ou
+// ou
 
-// for ( index = 0; index <= 10; index +=1) {
-// 	console.log(index);
-// };
+for ( index = 0; index <= 10; index +=1) {
+	console.log(index);
+};
 
 // Crie um array de 5 posições com quaisquer valores. Utilize qualquer estrutura de repetição apresentada no vídeo para exibir todos os valores do array;
 
-// let array = [ "posicao1", "posicao2", "posicao3", "posicao4", "posicao5"];
+let array = [ "posicao1", "posicao2", "posicao3", "posicao4", "posicao5"];
 
-// for( index = 0; index < array.length; index += 1) {
-// 	console.log(array[index]);
-// };
+for( index = 0; index < array.length; index += 1) {
+	console.log(array[index]);
+};
 
 // Crie um algoritmo capaz de calcular a média aritmética de um array com qualquer quantidade de elementos numéricos. Para fins de exemplo, o resultado do algoritmo com um array de valores 1, 2, 3, 5, 8, 13, 21, 23, 34, 55 deve ser 16.5. Procure usar uma estrutura de repetição diferente da que você usou para fazer o exercício anterior;
 
 
-// let arrayNum = [1, 2, 3, 5, 8, 13, 21, 23, 34, 55];
-// let soma = 0;
-// for(index = 0; index < arrayNum.length; index +=1){
-// 	soma += arrayNum[index]
-// 	// console.log(soma)
-// };
+let arrayNum = [1, 2, 3, 5, 8, 13, 21, 23, 34, 55];
+let soma = 0;
+for(index = 0; index < arrayNum.length; index +=1){
+	soma += arrayNum[index]
+	// console.log(soma)
+};
 
-// media = soma / arrayNum.length
-// console.log(media);
+media = soma / arrayNum.length
+console.log(media);
 
 
 
