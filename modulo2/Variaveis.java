@@ -30,3 +30,6 @@ public class Variaveis {
 
 
 // package: começa com letra minuscua
+
+
+// constante é declado com FINAL;

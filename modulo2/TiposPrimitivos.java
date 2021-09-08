@@ -3,7 +3,7 @@ public class TiposPrimitivos {
 		byte idade01 = 20;
 		short idade02 = 21;
 		int idade03 = 22;
-		long idade04 = 23;
+		long idade04 = 23l;
 
 		double valorPassagem = 2.90;
 		float valorTomate = 3.95f; //float precisa do F depois do numero;
