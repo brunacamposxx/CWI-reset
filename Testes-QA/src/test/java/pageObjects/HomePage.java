@@ -9,6 +9,7 @@ public class HomePage extends HomePageElementMapper {
     public HomePage(){
         PageFactory.initElements(Browser.getCurrentDriver(), this);
     }
+
     public void clickBtnLogin(){
         login.click();
     }
@@ -31,4 +32,8 @@ public class HomePage extends HomePageElementMapper {
         clickSubmit_search();
     }
 
+    public void clickCategoryTShirts(){
+
+        menuTshirts.click();
+    }
 }

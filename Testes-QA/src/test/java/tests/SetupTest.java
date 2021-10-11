@@ -4,6 +4,7 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import pageObjects.CategoryPage;
 import pageObjects.HomePage;
 import pageObjects.LoginPage;
 import pageObjects.SearchPage;
@@ -86,6 +87,31 @@ public class SetupTest extends BaseTests{
         System.out.println("E aqui também");
     }
 
+    @Test
+    public void testAcessarCategoryTShirts(){
+        // Inicia as páginas
+        HomePage home = new HomePage();
+        CategoryPage category = new CategoryPage();
+        // Clicar na categoria T-Shirt
+        // home.clickCategoryTShirts();
+        Browser.getCurrentDriver().findElement(By.linkText("T-SHIRTS")).click();
 
+
+        //validar se ao clicar em CATEGORIA TSHIRTS ocorre o direcionamento correto
+        assertTrue(category.isPageTShirts());
+    }
+
+    @Test
+    public void testAddProductPage(){
+        // Acessar a categoria T-Shirts
+        testAcessarCategoryTShirts();
+
+        // Iniciar as páginas
+        CategoryPage category = new CategoryPage();
+
+        // Clicar em MORE e direcionar para a página do produto
+        category.clickProductAddToProductPage();
+
+    }
 
 }
