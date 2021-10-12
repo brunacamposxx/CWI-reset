@@ -4,10 +4,7 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import pageObjects.CategoryPage;
-import pageObjects.HomePage;
-import pageObjects.LoginPage;
-import pageObjects.SearchPage;
+import pageObjects.*;
 import utils.Browser;
 import utils.Utils;
 
@@ -108,10 +105,16 @@ public class SetupTest extends BaseTests{
 
         // Iniciar as páginas
         CategoryPage category = new CategoryPage();
+        ProductPage pdp = new ProductPage();
+
+        //Salva nome do produto na página de categoria
+        String nameProductCategor = category.getProductNameCategory();
 
         // Clicar em MORE e direcionar para a página do produto
         category.clickProductAddToProductPage();
 
+        // Verificar se o produto está na pagina de detalhes do produto correto
+        assertTrue(pdp.getProductNamePDP().equals(nameProductCategor));
     }
 
 }

@@ -24,4 +24,7 @@ public class CategoryPage extends CategoryPageElementMApper {
     buttonMoreAddToProductPage.click();
   }
 
+  public String getProductNameCategory(){
+    return productNameCategory.getText();
+  }
 }
