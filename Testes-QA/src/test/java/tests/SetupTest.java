@@ -1,5 +1,8 @@
 package tests;
 
+import io.qameta.allure.Stories;
+import io.qameta.allure.Story;
+import io.qameta.allure.junit4.DisplayName;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,10 +15,11 @@ import static org.junit.Assert.assertTrue;
 
 public class SetupTest extends BaseTests{
     @Test
+    @DisplayName("Abre o navegador e carrega a URL")
     public void testOpeningBrowserAndLoadingPage(){
         assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl()));
-        System.out.println("Abrimos o navegador e carregamos a URL");
     }
+
     @Test
     public void testLogin() {
         // Iniciar as páginas
@@ -99,6 +103,7 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
+    @Story("Acessa a página do produto")
     public void testAddProductToProductPage(){
         // Acessar a categoria T-Shirts
         testAcessarCategoryTShirts();
@@ -119,15 +124,15 @@ public class SetupTest extends BaseTests{
 
     @Test
     public void testAddProductToCartPage(){
+         testLogin();
+        // Iniciar página de Login
+         LoginPage login = new LoginPage();
         // Acessa a página de produto
         testAddProductToProductPage();
-
         // Inicia as páginas
         ProductPage pdp = new ProductPage();
 
         CartPage cart = new CartPage();
-
-
 
         //Salvar o nome do produto na pagina de PDP
         String nameProductPDP = pdp.getProductNamePDP();
@@ -140,7 +145,33 @@ public class SetupTest extends BaseTests{
 
         //Validação do nome do produto no carrinho
         assertTrue(cart.getNameProductCart().equals(nameProductPDP));
+        Browser.getCurrentDriver().findElement(By.cssSelector("#center_column > p.cart_navigation.clearfix > a.button.btn.btn-default.standard-checkout.button-medium")).click();
 
-
+        assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("ADDRESS"));
+        System.out.println("find address");
     }
+
+    @Test
+    @DisplayName("Testa página de confirmação de endereço")
+    public void testDeliveryAddressPage(){
+        // Acessa a página de carrinho
+        testAddProductToCartPage();
+        // Iniciar as páginas
+        AddressPage delivery = new AddressPage();
+        // String
+        // assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("ADDRESS"));
+        AddressPage.clickBtnProceedToCheckout();
+        assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("SHIPPING"));
+        AddressPage.clickCheckbox();
+        System.out.println("selecionou checkbox");
+        AddressPage.clickProcessCarrier();
+        System.out.println("Clicou em Proceed To Checkout");
+        assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("PLEASE CHOOSE YOUR PAYMENT METHOD"));
+        assertTrue(Browser.getCurrentDriver().findElement(By.cssSelector("#product_price_1_1_513467 > span")).getText().contains("$16.51"));
+        AddressPage.clickBankwire();
+        AddressPage.clickconfirmOrder();
+        assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("ORDER CONFIRMATION"));
+        System.out.println("CONFIRMAÇÃO DE COMPRA! FIM!!!");
+    };
+
 }
