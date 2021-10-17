@@ -4,14 +4,12 @@ import elementMapper.AddressPageElementMapper;
 import org.openqa.selenium.support.PageFactory;
 import utils.Browser;
 
+
 public class AddressPage extends AddressPageElementMapper {
   public AddressPage(){
     PageFactory.initElements(Browser.getCurrentDriver(), this);
   }
 
-//  public FindAddress(){
-//    Address.getText().contains("ADDRESS");
-//  }
   public static void clickBtnProceedToCheckout(){
     btnProceedToCheckout.click();
   }

@@ -1,6 +1,5 @@
 package tests;
 
-import io.qameta.allure.Stories;
 import io.qameta.allure.Story;
 import io.qameta.allure.junit4.DisplayName;
 import org.hamcrest.CoreMatchers;
@@ -173,5 +172,24 @@ public class SetupTest extends BaseTests{
         assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("ORDER CONFIRMATION"));
         System.out.println("CONFIRMAÇÃO DE COMPRA! FIM!!!");
     };
+
+//    @Test
+//    public void testSignIn(){
+//        // Iniciar as páginas
+//        HomePage home = new HomePage();
+//
+//        // Iniciar página de Login
+//        LoginPage login = new LoginPage();
+//
+//
+//        home.clickBtnLogin();
+//        System.out.println("Clicou em Sign In e direcionou para a página de Login");
+//        assertTrue(Browser.getCurrentDriver().getCurrentUrl()
+//          .contains(Utils.getBaseUrl().concat("index.php?controller=authentication&back=my-account")));
+//
+//    }
+
+
+
 
 }
