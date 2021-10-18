@@ -1,6 +1,7 @@
 package pageObjects;
 
 import elementMapper.CreateAnAccountElementMapper;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
 import utils.Browser;
 
@@ -9,14 +10,15 @@ public class CreateAnAccountPage extends CreateAnAccountElementMapper {
     PageFactory.initElements(Browser.getCurrentDriver(), this);
   }
 
+  @Step("Clica no botão Login")
   public void clickBtnLogin(){
     login.click();
   }
   // String emailRandom = "bruna" + Random().nextInt() + "@gmail.com";
   public void createEmail() {
-    email_create.sendKeys("xablau@hotmail.com");
+    email_create.sendKeys("xablau92@hotmail.com");
   }
-
+  @Step("Clica em criar conta / página de login")
   public void btnSubmitCreate(){
     submitCreate.click();
   }
@@ -53,6 +55,7 @@ public class CreateAnAccountPage extends CreateAnAccountElementMapper {
     phone_mobile.sendKeys("21979530020");
   }
 
+  @Step("Clica em registrar conta / página de preenchimento de dados")
   public void btnSubmitAccount(){
     submitAccount.click();
   }

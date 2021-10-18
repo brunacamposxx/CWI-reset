@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.qameta.allure.junit4.DisplayName;
 import org.hamcrest.CoreMatchers;
@@ -12,14 +13,16 @@ import utils.Utils;
 
 import static org.junit.Assert.assertTrue;
 
+@Feature("Testes site de e-commerce")
 public class SetupTest extends BaseTests{
     @Test
-    @DisplayName("Abre o navegador e carrega a URL")
+    @Story("Abre o navegador e carrega a URL")
     public void testOpeningBrowserAndLoadingPage(){
         assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl()));
     }
 
     @Test
+    @Story("Testa caminho para usuário fazer login")
     public void testLogin() {
         // Iniciar as páginas
         HomePage home = new HomePage();
@@ -67,6 +70,7 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
+    @Story("Testa search")
     public void testSearch(){
 
         String quest = "DRESS";
@@ -89,6 +93,7 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
+    @Story("Página de categoria T-Shirt")
     public void testAcessarCategoryTShirts(){
         // Inicia as páginas
         HomePage home = new HomePage();
@@ -123,6 +128,7 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
+    @Story("Adiciona produto ao carrinho")
     public void testAddProductToCartPage(){
          testLogin();
         // Iniciar página de Login
@@ -152,7 +158,7 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
-    @DisplayName("Testa página de confirmação de endereço")
+    @Story("Testa página de confirmação de endereço/compra")
     public void testDeliveryAddressPage(){
         // Acessa a página de carrinho
         testAddProductToCartPage();
@@ -174,6 +180,7 @@ public class SetupTest extends BaseTests{
     };
 
     @Test
+    @Story("Testa caminho de criação de novo usuário")
     public void testSignIn(){
         // Iniciar as páginas
         CreateAnAccountPage createAnAccount = new CreateAnAccountPage();
