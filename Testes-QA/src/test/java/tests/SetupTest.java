@@ -42,7 +42,8 @@ public class SetupTest extends BaseTests{
 
         login.clickBtnSubmitLogin();
         System.out.println("Clicou no Sign In");
-        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().concat("index.php?controller=my-account")));
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl()
+            .contains(Utils.getBaseUrl().concat("index.php?controller=my-account")));
         System.out.println("Validou a url da minha conta");
         assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("MY ACCOUNT"));
         System.out.println("Validou Minha Conta no site");
@@ -157,7 +158,6 @@ public class SetupTest extends BaseTests{
         testAddProductToCartPage();
         // Iniciar as páginas
         AddressPage delivery = new AddressPage();
-        // String
         // assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("ADDRESS"));
         AddressPage.clickBtnProceedToCheckout();
         assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("SHIPPING"));
@@ -173,21 +173,37 @@ public class SetupTest extends BaseTests{
         System.out.println("CONFIRMAÇÃO DE COMPRA! FIM!!!");
     };
 
-//    @Test
-//    public void testSignIn(){
-//        // Iniciar as páginas
-//        HomePage home = new HomePage();
-//
-//        // Iniciar página de Login
-//        LoginPage login = new LoginPage();
-//
-//
-//        home.clickBtnLogin();
-//        System.out.println("Clicou em Sign In e direcionou para a página de Login");
+    @Test
+    public void testSignIn(){
+        // Iniciar as páginas
+        CreateAnAccountPage createAnAccount = new CreateAnAccountPage();
+
+        createAnAccount.clickBtnLogin();
+        System.out.println("Clicou em Sign In e direcionou para a página de Login");
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl()
+          .contains(Utils.getBaseUrl().concat("index.php?controller=authentication&back=my-account")));
+        System.out.println("concatenou a url - estou na página de login");
+        createAnAccount.createEmail();
+        System.out.println("Digitou o email da conta");
+        createAnAccount.btnSubmitCreate();
+        System.out.println("Clicou em criar conta");
+
 //        assertTrue(Browser.getCurrentDriver().getCurrentUrl()
-//          .contains(Utils.getBaseUrl().concat("index.php?controller=authentication&back=my-account")));
-//
-//    }
+//          .contains(Utils.getBaseUrl().concat("index.php?controller=authentication&back=my-account#account-creation")));
+//        System.out.println("Validou URL de criação de conta");
+        // assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("CREATE AN ACCOUNT"));
+        System.out.println("Página de criação de conta");
+        createAnAccount.fillCustomer_firstname();
+        createAnAccount.fillCustomer_lastname();
+        createAnAccount.passwd();
+        createAnAccount.fillAddress();
+        createAnAccount.fillCity();
+        createAnAccount.fillState();
+        createAnAccount.fillPostCode();
+        createAnAccount.fillPhone();
+        createAnAccount.btnSubmitAccount();
+        System.out.println("Conta criada!");
+    }
 
 
 
