@@ -8,7 +8,10 @@ pageObjects\HomePage.class
 pageObjects\MyAccountPage.class
 pageObjects\ProductPage.class
 tests\BaseTests.class
+elementMapper\AddressPageElementMapper.class
+pageObjects\CreateAnAccountPage.class
 elementMapper\MyAccountPageElementMapper.class
+pageObjects\AddressPage.class
 elementMapper\HomePageElementMapper.class
 pageObjects\LoginPage.class
 pageObjects\BasePage.class
@@ -16,4 +19,5 @@ pageObjects\CartPage.class
 elementMapper\CategoryPageElementMApper.class
 elementMapper\SearchPageElementMapper.class
 pageObjects\SearchPage.class
+elementMapper\CreateAnAccountElementMapper.class
 tests\SetupTest.class

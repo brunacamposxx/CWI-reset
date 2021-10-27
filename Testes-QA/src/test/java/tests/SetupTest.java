@@ -1,5 +1,8 @@
 package tests;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+import io.qameta.allure.junit4.DisplayName;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,13 +13,16 @@ import utils.Utils;
 
 import static org.junit.Assert.assertTrue;
 
+@Feature("Testes site de e-commerce")
 public class SetupTest extends BaseTests{
     @Test
+    @Story("Abre o navegador e carrega a URL")
     public void testOpeningBrowserAndLoadingPage(){
         assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl()));
-        System.out.println("Abrimos o navegador e carregamos a URL");
     }
+
     @Test
+    @Story("Testa caminho para usuário fazer login")
     public void testLogin() {
         // Iniciar as páginas
         HomePage home = new HomePage();
@@ -39,7 +45,8 @@ public class SetupTest extends BaseTests{
 
         login.clickBtnSubmitLogin();
         System.out.println("Clicou no Sign In");
-        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().concat("index.php?controller=my-account")));
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl()
+            .contains(Utils.getBaseUrl().concat("index.php?controller=my-account")));
         System.out.println("Validou a url da minha conta");
         assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("MY ACCOUNT"));
         System.out.println("Validou Minha Conta no site");
@@ -63,6 +70,7 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
+    @Story("Testa search")
     public void testSearch(){
 
         String quest = "DRESS";
@@ -85,6 +93,7 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
+    @Story("Página de categoria T-Shirt")
     public void testAcessarCategoryTShirts(){
         // Inicia as páginas
         HomePage home = new HomePage();
@@ -99,6 +108,7 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
+    @Story("Acessa a página do produto")
     public void testAddProductToProductPage(){
         // Acessar a categoria T-Shirts
         testAcessarCategoryTShirts();
@@ -118,16 +128,17 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
+    @Story("Adiciona produto ao carrinho")
     public void testAddProductToCartPage(){
+         testLogin();
+        // Iniciar página de Login
+         LoginPage login = new LoginPage();
         // Acessa a página de produto
         testAddProductToProductPage();
-
         // Inicia as páginas
         ProductPage pdp = new ProductPage();
 
         CartPage cart = new CartPage();
-
-
 
         //Salvar o nome do produto na pagina de PDP
         String nameProductPDP = pdp.getProductNamePDP();
@@ -140,7 +151,68 @@ public class SetupTest extends BaseTests{
 
         //Validação do nome do produto no carrinho
         assertTrue(cart.getNameProductCart().equals(nameProductPDP));
+        Browser.getCurrentDriver().findElement(By.cssSelector("#center_column > p.cart_navigation.clearfix > a.button.btn.btn-default.standard-checkout.button-medium")).click();
 
-
+        assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("ADDRESS"));
+        System.out.println("find address");
     }
+
+    @Test
+    @Story("Testa página de confirmação de endereço/compra")
+    public void testDeliveryAddressPage(){
+        // Acessa a página de carrinho
+        testAddProductToCartPage();
+        // Iniciar as páginas
+        AddressPage delivery = new AddressPage();
+        // assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("ADDRESS"));
+        AddressPage.clickBtnProceedToCheckout();
+        assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("SHIPPING"));
+        AddressPage.clickCheckbox();
+        System.out.println("selecionou checkbox");
+        AddressPage.clickProcessCarrier();
+        System.out.println("Clicou em Proceed To Checkout");
+        assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("PLEASE CHOOSE YOUR PAYMENT METHOD"));
+        assertTrue(Browser.getCurrentDriver().findElement(By.cssSelector("#product_price_1_1_513467 > span")).getText().contains("$16.51"));
+        AddressPage.clickBankwire();
+        AddressPage.clickconfirmOrder();
+        assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("ORDER CONFIRMATION"));
+        System.out.println("CONFIRMAÇÃO DE COMPRA! FIM!!!");
+    };
+
+    @Test
+    @Story("Testa caminho de criação de novo usuário")
+    public void testSignIn(){
+        // Iniciar as páginas
+        CreateAnAccountPage createAnAccount = new CreateAnAccountPage();
+
+        createAnAccount.clickBtnLogin();
+        System.out.println("Clicou em Sign In e direcionou para a página de Login");
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl()
+          .contains(Utils.getBaseUrl().concat("index.php?controller=authentication&back=my-account")));
+        System.out.println("concatenou a url - estou na página de login");
+        createAnAccount.createEmail();
+        System.out.println("Digitou o email da conta");
+        createAnAccount.btnSubmitCreate();
+        System.out.println("Clicou em criar conta");
+
+//        assertTrue(Browser.getCurrentDriver().getCurrentUrl()
+//          .contains(Utils.getBaseUrl().concat("index.php?controller=authentication&back=my-account#account-creation")));
+//        System.out.println("Validou URL de criação de conta");
+        // assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText().contains("CREATE AN ACCOUNT"));
+        System.out.println("Página de criação de conta");
+        createAnAccount.fillCustomer_firstname();
+        createAnAccount.fillCustomer_lastname();
+        createAnAccount.passwd();
+        createAnAccount.fillAddress();
+        createAnAccount.fillCity();
+        createAnAccount.fillState();
+        createAnAccount.fillPostCode();
+        createAnAccount.fillPhone();
+        createAnAccount.btnSubmitAccount();
+        System.out.println("Conta criada!");
+    }
+
+
+
+
 }
